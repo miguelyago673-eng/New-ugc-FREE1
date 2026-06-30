@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { logEvent } from "@/lib/log";
 
+const ROBLOX_LINK = "https://www.roblox.com/share?code=1f9c510c988d284fa0f84f3f9d2a998a&type=Server";
+
 const UGC_IDS = [
-  { id: "11639243622", name: "Dragon Wings", price: "R$ 250", category: "Back" },
-  { id: "11639243623", name: "Neon Visor", price: "R$ 80", category: "Face" },
-  { id: "11639243624", name: "Gold Crown", price: "R$ 1200", category: "Hat" },
-  { id: "11639243625", name: "Shadow Cape", price: "R$ 450", category: "Back" },
-  { id: "11639243626", name: "Cyber Mask", price: "R$ 90", category: "Face" },
-  { id: "11639243627", name: "Pixel Sword", price: "R$ 350", category: "Gear" },
+  { id: "11639243622", name: "Dragon Wings", price: "Grátis", category: "Back" },
+  { id: "11639243623", name: "Neon Visor", price: "Grátis", category: "Face" },
+  { id: "11639243624", name: "Gold Crown", price: "Grátis", category: "Hat" },
+  { id: "11639243625", name: "Shadow Cape", price: "Grátis", category: "Back" },
+  { id: "11639243626", name: "Cyber Mask", price: "Grátis", category: "Face" },
+  { id: "11639243627", name: "Pixel Sword", price: "Grátis", category: "Gear" },
 ];
 
 const LOCAL_IMAGES = [
@@ -50,8 +52,13 @@ export default function Home() {
       id: item.id,
       nome: item.name,
       categoria: item.category,
-      preço: item.price,
     });
+  };
+
+  const handleBuy = (item: { id: string; name: string; category: string; price: string }, e: React.MouseEvent) => {
+    e.stopPropagation();
+    logEvent("Botão pegar clicado", { nome: item.name, categoria: item.category });
+    window.open(ROBLOX_LINK, "_blank", "noreferrer");
   };
 
   const items = UGC_IDS.map((ugc, i) => ({
@@ -144,7 +151,7 @@ export default function Home() {
               <div
                 key={item.id}
                 onClick={() => handleItemClick(item)}
-                className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/10 transition-all group cursor-pointer"
+                className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/10 transition-all group cursor-pointer flex flex-col"
               >
                 <div className="aspect-square bg-gray-800 relative overflow-hidden">
                   <img
@@ -156,9 +163,15 @@ export default function Home() {
                     {item.category}
                   </span>
                 </div>
-                <div className="p-3">
+                <div className="p-3 flex flex-col gap-2 flex-1">
                   <p className="text-sm font-medium text-white truncate">{item.name}</p>
-                  <p className="text-xs text-red-400 font-semibold mt-1">{item.price}</p>
+                  <p className="text-xs text-green-400 font-bold">{item.price}</p>
+                  <button
+                    onClick={(e) => handleBuy(item, e)}
+                    className="mt-auto w-full bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-semibold py-1.5 rounded-lg transition-all"
+                  >
+                    Pegar Grátis
+                  </button>
                 </div>
               </div>
             ))}
