@@ -15,7 +15,7 @@ export async function logEvent(
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         embeds: [{
-          title: `📋 ${event}`,
+          title: `\u{1F4CB} ${event}`,
           color: 0x5865f2,
           fields,
           timestamp: new Date().toISOString(),
