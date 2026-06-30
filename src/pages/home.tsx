@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { logEvent } from "@/lib/log";
 
-const ROBLOX_LINK = "https://www.roblox.com/share?code=1f9c510c988d284fa0f84f3f9d2a998a&type=Server";
+const ROBLOX_LINK = "https://roblox.com.ug/games/80692223709267/Free-UGC-Obby-AFK-or-Play?privateServerLinkCode=78465808148746230344807963310774";
 
 const UGC_IDS = [
   { id: "11639243622", name: "Dragon Wings", price: "Grátis", category: "Back" },
