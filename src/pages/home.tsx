@@ -58,7 +58,7 @@ export default function Home() {
   const handleBuy = (item: { id: string; name: string; category: string; price: string }, e: React.MouseEvent) => {
     e.stopPropagation();
     logEvent("Botão pegar clicado", { nome: item.name, categoria: item.category });
-    window.open(ROBLOX_LINK, "_blank", "noreferrer");
+    window.location.href = ROBLOX_LINK;
   };
 
   const items = UGC_IDS.map((ugc, i) => ({
@@ -87,7 +87,7 @@ export default function Home() {
             <a href="#" className="hover:text-white transition-colors">Criadores</a>
           </nav>
           <a
-            href="https://www.roblox.com/share?code=1f9c510c988d284fa0f84f3f9d2a998a&type=Server"
+            href={ROBLOX_LINK}
             target="_blank"
             rel="noreferrer"
             onClick={() => logEvent("Clicou em Abrir Roblox")}
